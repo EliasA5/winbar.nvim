@@ -5,6 +5,7 @@ local defaults = {
   buf_modified = true,
   buf_modified_symbol = "M",
   dir_levels = 0,
+  workdir = false,
   dim_inactive = {
     enabled = false,
     highlight = "WinbarNC",

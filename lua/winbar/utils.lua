@@ -112,4 +112,23 @@ function M.get_icon(icons_by_filename, icons_by_extension)
   return icon.icon, M.get_highlight_name(icon)
 end
 
+
+---@return string
+function M.get_base_git_dir()
+
+  local relative_path = vim.fn.expand("%:.:h")
+  local base_dir = vim.fs.dirname(vim.fs.find('.git', { path = vim.fn.expand("%:."), upward = true })[1])
+  local path
+  if base_dir == nil then
+    path = relative_path
+  else
+    path = relative_path
+    if base_dir ~= "." then
+      path = path:sub(string.len(base_dir) + 2) .. "/"
+    end
+  end
+
+  return path
+end
+
 return M

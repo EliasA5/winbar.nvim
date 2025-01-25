@@ -7,12 +7,20 @@ local function augroup(name)
 end
 
 local function get_folders()
+  local workdir = config.options.workdir
+  local path
+  if workdir == "git" then
+    return utils.get_base_git_dir()
+  elseif workdir == "relative" then
+    return vim.fn.expand("%:.:h") .. "/"
+  end
+
   local levels = config.options.dir_levels
   if levels <= 0 then
     return ""
   end
 
-  local path = vim.fn.expand("%:p:h")
+  path = vim.fn.expand("%:p:h")
 
   local parts = {}
   for part in string.gmatch(path, "[^/]+") do
